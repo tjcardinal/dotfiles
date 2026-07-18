@@ -1,5 +1,4 @@
 - name: Configure HTPC as a Home Theater PC
   hosts: htpc
   roles:
-    - game_stream_client
-    - jellyfin_client
+    - htpc

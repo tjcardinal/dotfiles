@@ -1,0 +1,4 @@
+- import_playbook: atlas.yml
+- import_playbook: htpc.yml
+- import_playbook: nate.yml
+- import_playbook: solomon.yml

@@ -3,5 +3,4 @@
   roles:
     - common
     - workstation
-    - gaming
-    - game_stream_server
+    - tyler_desktop

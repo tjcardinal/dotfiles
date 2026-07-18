@@ -200,47 +200,6 @@ end)
 ---
 ---
 
---- Treesitter
-later(function()
-	add({
-		source = "nvim-treesitter/nvim-treesitter",
-		hooks = {
-			post_checkout = function()
-				vim.cmd("TSUpdate")
-			end,
-		},
-	})
-
-	setup("nvim-treesitter.configs", {
-		ensure_installed = {
-			"bash",
-			"c",
-			"cpp",
-			"diff",
-			"fennel",
-			"git_config",
-			"git_rebase",
-			"gitattributes",
-			"gitcommit",
-			"gitignore",
-			"gleam",
-			"go",
-			"haskell",
-			"json",
-			"lua",
-			"make",
-			"nix",
-			"python",
-			"rust",
-			"toml",
-			"vim",
-			"vimdoc",
-		},
-		highlight = { enable = true },
-		indent = { enable = true },
-	})
-end)
-
 --- Formatter
 later(function()
 	add("stevearc/conform.nvim")
@@ -251,6 +210,7 @@ later(function()
 			python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 			rust = { "rustfmt" },
 			fennel = { "fnlfmt" },
+			go = { "gofmt" },
 		},
 		format_on_save = { lsp_format = "fallback" },
 	})

@@ -3,5 +3,4 @@
   roles:
     - common
     - server
-    - media_server
-    - tailscale
+    - atlas

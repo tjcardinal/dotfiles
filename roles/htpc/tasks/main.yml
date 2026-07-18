@@ -5,3 +5,10 @@
     cache_valid_time: 3600
     name:
       - jellyfin
+
+- name: Install Snaps
+  become: yes
+  community.general.snap:
+    name:
+      - moonlight
+    state: present
