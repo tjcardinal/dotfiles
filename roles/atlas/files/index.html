@@ -7,12 +7,22 @@
 </head>
 <body>
     <ul>
-        <li><a href="http://atlas.home.local:8081">Miniflux (rss)</a></li>
-        <li><a href="http://atlas.home.local:13378">Audiobookshelf</a></li>
-        <li><a href="http://atlas.home.local:8096">Jellyfin</a></li>
-        <li><a href="http://atlas.home.local:7878">Radarr (movies)</a></li>
-        <li><a href="http://atlas.home.local:8989">Sonarr (tv)</a></li>
-        <li><a href="http://atlas.home.local:8080">SABnzbd</a></li>
+        <li><a href="#" data-port="8081">Miniflux (rss)</a></li>
+        <li><a href="#" data-port="13378">Audiobookshelf</a></li>
+        <li><a href="#" data-port="8096">Jellyfin</a></li>
+        <li><a href="#" data-port="7878">Radarr (movies)</a></li>
+        <li><a href="#" data-port="8989">Sonarr (tv)</a></li>
+        <li><a href="#" data-port="8080">SABnzbd</a></li>
     </ul>
+
+    <script>
+        document.addEventListener('click', function(event) {
+            const targetPort = event.target.getAttribute('data-port');
+            if (targetPort) {
+                event.preventDefault();
+                window.location.port = targetPort;
+            }
+        });
+    </script>
 </body>
 </html>
