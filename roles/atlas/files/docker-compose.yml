@@ -7,6 +7,8 @@ services:
       - 80:80
     volumes:
       - ./index.html:/usr/share/nginx/html/index.html:ro
+    labels:
+      - "nautical.enable=false"
 
   tailscale:
     container_name: tailscale
@@ -25,6 +27,8 @@ services:
       - net_raw
     env_file:
       - .env # TS_AUTHKEY
+    labels:
+      - "nautical.enable=false"
 
   nautical:
     container_name: nautical
@@ -32,12 +36,16 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Chicago
-      - CRON_SCHEDULE=0 4 * * 1
+      - CRON_SCHEDULE=0 3 * * 6
+      - USE_DEST_DATE_FOLDER=true
+      - NUMBER_OF_BACKUPS_TO_KEEP=50
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /docker/nautical:/config
       - /docker:/app/source
       - /mnt/disk1/backups:/app/destination
+    labels:
+      - "nautical.enable=false"
 
 # Media
   jellyfin:
@@ -126,14 +134,16 @@ services:
       - RUN_MIGRATIONS=1
       - POLLING_FREQUENCY=30
       - POLLING_LIMIT_PER_HOST=1
-      - SCHEDULER_ROUND_ROBIN_MIN_INTERVAL=2880 # 2 days
-      - SCHEDULER_ROUND_ROBIN_MAX_INTERVAL=2880 # 2 days
+      - SCHEDULER_ROUND_ROBIN_MIN_INTERVAL=7200 # 5 days
+      - SCHEDULER_ROUND_ROBIN_MAX_INTERVAL=7200 # 5 days
       - CREATE_ADMIN=1
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=adminadmin1
     depends_on:
       miniflux-db:
         condition: service_healthy
+    labels:
+      - "nautical.enable=false"
 
   miniflux-db:
     container_name: miniflux-db
@@ -151,5 +161,6 @@ services:
       start_period: 30s
 
 # todo add:
-# syncthing (for obsidian and anki)
+# obsidian
+# anki
 # bookmark manager???
