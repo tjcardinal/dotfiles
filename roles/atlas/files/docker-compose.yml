@@ -47,6 +47,14 @@ services:
     labels:
       - "nautical.enable=false"
 
+  syncthing:
+    container_name: syncthing
+    image: syncthing/syncthing
+    restart: unless-stopped
+    volumes:
+      - /docker/syncthing:/var/syncthing
+    network_mode: host
+
 # Media
   jellyfin:
     container_name: jellyfin
@@ -159,6 +167,20 @@ services:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
       start_period: 30s
+
+  # anki-sync-server:
+  #   container_name: anki-sync-server
+  #   image: chrislongros/anki-sync-server-enhanced:latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8082:8080
+  #   environment:
+  #     - TZ=America/Chicago
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - SYNC_USER1=tcardinal:anki
+  #   volumes:
+  #     - /docker/anki-sync-server:/data
 
 # todo add:
 # obsidian

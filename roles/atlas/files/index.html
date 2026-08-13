@@ -8,7 +8,11 @@
 <body>
     <ul>
         <li><a href="#" data-port="8081">Miniflux (rss)</a></li>
+
         <li><a href="#" data-port="13378">Audiobookshelf</a></li>
+
+        <li><a href="#" data-port="8384" data-ssl="true">Syncthing</a></li>
+
         <li><a href="#" data-port="8096">Jellyfin</a></li>
         <li><a href="#" data-port="7878">Radarr (movies)</a></li>
         <li><a href="#" data-port="8989">Sonarr (tv)</a></li>
@@ -17,10 +21,25 @@
 
     <script>
         document.addEventListener('click', function(event) {
-            const targetPort = event.target.getAttribute('data-port');
-            if (targetPort) {
+            const link = event.target.closest('a');
+            if (!link) {
+                return;
+            }
+
+            const targetPort = link.getAttribute('data-port');
+            const isSSL = link.getAttribute('data-ssl');
+            if (targetPort || isSSL) {
                 event.preventDefault();
-                window.location.port = targetPort;
+                const newURL = new URL(window.location.href);
+
+                if (targetPort) {
+                    newURL.port = targetPort;
+                }
+                if (isSSL) {
+                    newURL.protocol = 'https:';
+                }
+
+                window.location.href = newURL.toString();
             }
         });
     </script>
