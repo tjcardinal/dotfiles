@@ -183,5 +183,4 @@ services:
       - /docker/anki-sync-server:/data
 
 # todo add:
-# anki
 # bookmark manager???
