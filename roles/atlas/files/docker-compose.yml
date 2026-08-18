@@ -168,21 +168,20 @@ services:
       interval: 10s
       start_period: 30s
 
-  # anki-sync-server:
-  #   container_name: anki-sync-server
-  #   image: chrislongros/anki-sync-server-enhanced:latest
-  #   restart: unless-stopped
-  #   ports:
-  #     - 8082:8080
-  #   environment:
-  #     - TZ=America/Chicago
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - SYNC_USER1=tcardinal:anki
-  #   volumes:
-  #     - /docker/anki-sync-server:/data
+  anki-sync-server:
+    container_name: anki-sync-server
+    image: chrislongros/anki-sync-server-enhanced:latest
+    restart: unless-stopped
+    ports:
+      - 8082:8080 # Sync server
+      - 8083:8081 # Dashboard
+    environment:
+      - TZ=America/Chicago
+      - SYNC_USER1=tcardinal:anki
+      - DASHBOARD_ENABLED=true
+    volumes:
+      - /docker/anki-sync-server:/data
 
 # todo add:
-# obsidian
 # anki
 # bookmark manager???
